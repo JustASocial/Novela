@@ -4,6 +4,7 @@
 // Responsibilities: window lifecycle, backend (Novela.Core) discovery +
 // health checks, file dialogs, and the obfuscation job bridge (spawn per job
 // over the --stdin JSON protocol). No UI logic lives here.
+// AAAAAAAAAAAAAAAAA IM CRAZY I LOVE FEMBOYS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 const { app, BrowserWindow, ipcMain, dialog, Tray, Menu, nativeImage } = require('electron');
 const path = require('path');
