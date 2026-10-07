@@ -1,0 +1,19 @@
+# Maintainer: Arch User Repository (AUR) template for Novela.
+# AUR submission is manual (needs an AUR account): copy this folder content
+# into a package repo, fill in the sha256sums for the release tarball, and
+# push. The binary pacman package itself is produced by `npm run dist`
+# on Linux (electron-builder target "pacman").
+pkgname=novela
+pkgver=1.2.0
+pkgrel=1
+pkgdesc="Desktop obfuscator for Luau scripts"
+arch=('x86_64')
+url="https://github.com/JustASocial/Novela"
+license=('custom')
+source=("Novela-${pkgver}.pkg.tar.zst::https://github.com/JustASocial/Novela/releases/download/v${pkgver}/Novela-${pkgver}.pkg.tar.zst")
+sha256sums=('REPLACE_WITH_TARBALL_SHA256')
+
+package() {
+  # electron-builder pacman output is a full archive tree; merge it in.
+  bsdtar -xf "${srcdir}/Novela-${pkgver}.pkg.tar.zst" -C "${pkgdir}/"
+}

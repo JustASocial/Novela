@@ -58,8 +58,11 @@ flowchart LR
 
 Grab the latest build from the [**Releases**](https://github.com/JustASocial/Novela/releases/latest) page:
 
-- `Novela-Setup-1.2.0.exe` — installer
-- `Novela-Portable/` — no install needed, just run `Novela.exe`
+| OS | Artifacts |
+|---|---|
+| Windows | `Novela-Setup-1.2.0.exe` (installer), `Novela-Portable-1.2.0.zip` |
+| macOS | `Novela-1.2.0.dmg`, `Novela-1.2.0.zip` (unsigned: right-click → Open on first launch) |
+| Linux | `.AppImage`, `.deb`, pacman `.pkg.tar.zst` (plus an AUR template under `packaging/arch`) |
 
 ## HTTP API
 

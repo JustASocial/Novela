@@ -225,16 +225,20 @@ function resolveBackendCandidates() {
 
   if (app.isPackaged) {
     // electron-builder extraResources -> <resources>/core/
-    candidates.push(path.join(process.resourcesPath, 'core', 'Novela.Core.exe'));
-    candidates.push(path.join(process.resourcesPath, 'core', 'Novela.Core'));
+    candidates.push(path.join(process.resourcesPath, 'core', coreExeName()));
+    candidates.push(path.join(process.resourcesPath, 'core', 'Novela.Core.dll'));
   } else {
-    // Dev layout: published single-file build, then plain build output.
-    candidates.push(path.join(__dirname, 'core-dist', 'Novela.Core.exe'));
+    // Dev layout: published single-file/folder build, then plain build output.
+    candidates.push(path.join(__dirname, 'core-dist', coreExeName()));
     candidates.push(path.join(__dirname, 'core', 'Novela.Core', 'bin', 'Release', 'net8.0', 'win-x64', 'Novela.Core.exe'));
     candidates.push(path.join(__dirname, 'core', 'Novela.Core', 'bin', 'Debug', 'net8.0', 'Novela.Core.dll'));
     candidates.push(path.join(__dirname, 'core', 'Novela.Core', 'bin', 'Debug', 'net8.0', 'win-x64', 'Novela.Core.exe'));
   }
   return candidates;
+}
+
+function coreExeName() {
+  return process.platform === 'win32' ? 'Novela.Core.exe' : 'Novela.Core';
 }
 
 function appIconPath() {
@@ -249,7 +253,13 @@ function appIconPath() {
 function pickBackend() {
   for (const p of resolveBackendCandidates()) {
     try {
-      if (p && fs.existsSync(p)) return p;
+      if (p && fs.existsSync(p)) {
+        // Unix apphosts can lose the exec bit through packagers; restore it.
+        if (process.platform !== 'win32' && !p.endsWith('.dll')) {
+          try { fs.chmodSync(p, 0o755); } catch { /* best effort */ }
+        }
+        return p;
+      }
     } catch { /* ignore */ }
   }
   return null;

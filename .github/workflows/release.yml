@@ -1,0 +1,73 @@
+name: release
+
+# Builds platform packages from this repo + a prebuilt backend binary.
+# The obfuscation core is closed-source: each job downloads the matching
+# Novela-Core-<rid>.tar.gz from the latest GitHub release into core-dist/
+# and packages the Electron app around it. When the core changes, upload
+# fresh core archives to a release FIRST, then tag the app release.
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            rid: win-x64
+            builder: "--win nsis portable"
+          - os: ubuntu-latest
+            rid: linux-x64
+            builder: "--linux AppImage deb pacman"
+          - os: macos-latest
+            rid: osx-x64
+            builder: "--mac dmg zip"
+          - os: macos-latest
+            rid: osx-arm64
+            builder: "--mac dmg zip"
+    runs-on: ${{ matrix.os }}
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: "false"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Linux packaging deps
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libarchive-tools rpm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch prebuilt backend core
+        shell: bash
+        run: |
+          mkdir -p core-dist
+          base="https://github.com/JustASocial/Novela/releases/latest/download"
+          curl -fL "$base/Novela-Core-${{ matrix.rid }}.tar.gz" -o core.tar.gz
+          tar -xzf core.tar.gz -C core-dist
+          ls core-dist | head -5
+
+      - name: Package
+        run: npx electron-builder ${{ matrix.builder }} --publish never
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: novela-${{ matrix.rid }}
+          path: |
+            Release/*.exe
+            Release/*.blockmap
+            Release/*.dmg
+            Release/*.zip
+            Release/*.AppImage
+            Release/*.deb
+            Release/*.pkg.tar.zst
+          if-no-files-found: error
