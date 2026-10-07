@@ -1,6 +1,7 @@
 'use strict';
 // Novela interface translations. Applied via data-i18n attributes + t().
 // Backend log lines stay in English; everything rendered by the UI is covered.
+// IM VERITY FR FRFRF R
 window.NOVELA_LANGS = [
   { code: 'en', label: 'English' },
   { code: 'ru', label: 'Русский' },
