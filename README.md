@@ -16,6 +16,7 @@ Custom VM · Control-flow flattening · String encryption
 <img src="https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white" />
 <img src="https://img.shields.io/badge/Electron-47848F?logo=electron&logoColor=white" />
 <img src="https://img.shields.io/badge/Luau-00A2FF?logo=lua&logoColor=white" />
+<img src="https://img.shields.io/badge/English%20%E2%80%A2%20%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%E2%80%A2%20%E4%B8%AD%E6%96%87%E6%96%87-12%20languages-blue" />
 </p>
 
 Novela takes a readable Luau script and turns it into something nobody wants to read: flattened control flow, encrypted strings, junk states guarded by opaque predicates, all packed into a compressed virtual-machine loader. Every build looks different.
@@ -34,6 +35,25 @@ Novela takes a readable Luau script and turns it into something nobody wants to 
 
 ![Settings](docs/screenshot-settings.png)
 
+## How it works
+
+```mermaid
+flowchart LR
+    A[Luau source] --> B[Parse to AST]
+    B --> C[Rename + flatten + encrypt strings]
+    C --> D[Pack into VM loader × N layers]
+    D --> E[Protected script]
+    E -->|executor| F[Decode + verify + load]
+```
+
+| Layer | What it does |
+|---|---|
+| Rename | Locals become dense 1–2 letter names (or long noise) |
+| Flatten | `if` / loops become a shuffled state machine |
+| Strings | Literals move to an encrypted, lazily-decoded table |
+| Junk | Dead array-states guarded by opaque predicates |
+| Pack | LZ77 → cipher → printable soup in a keyed loader |
+
 ## Download
 
 Grab the latest build from the [**Releases**](https://github.com/JustASocial/Novela/releases/latest) page:
@@ -41,29 +61,21 @@ Grab the latest build from the [**Releases**](https://github.com/JustASocial/Nov
 - `Novela-Setup-1.2.0.exe` — installer
 - `Novela-Portable/` — no install needed, just run `Novela.exe`
 
-## Build from source
-
-Requirements: Node.js 20+, .NET 8 SDK.
-
-```sh
-npm install        # pulls Electron and syncs the Monaco runtime
-npm run build:core # builds the backend (see note below)
-npm start
-```
-
-To package everything (installer + portable):
-
-```sh
-npm run release
-```
-
-> Note: the obfuscation core (`Novela.Core`) ships as a prebuilt, obfuscated binary and its source is not part of this repository. For a local build, drop a `Novela.Core` executable into `core-dist/` (or point `NOVELA_CORE_PATH` at it), or run it as a server — see below.
-
 ## HTTP API
+
+Run the backend as a server (bundled with the app, or standalone):
 
 ```sh
 Novela.Core serve --port 4477 --token secret
 ```
+
+| Method | Endpoint | Auth | Body |
+|---|---|---|---|
+| `GET` | `/api/health` | — | — |
+| `POST` | `/api/obfuscate` | `X-Novela-Token` | `{source, options, seed}` |
+
+<details>
+<summary>cURL example</summary>
 
 ```sh
 curl -X POST http://127.0.0.1:4477/api/obfuscate \
@@ -71,11 +83,13 @@ curl -X POST http://127.0.0.1:4477/api/obfuscate \
   -d '{"source":"print(1)","seed":7}'
 ```
 
-`GET /api/health` reports liveness. With a token set, send it as `X-Novela-Token`.
+Response: `{success, output, stats, logs, error}`.
+
+</details>
 
 ## Loadstrings
 
-Set a Pastebin dev key or a Pastefy API key in Settings, then hit **Loadstring** on any output. Novela uploads it under a random name, copies the raw URL and gives you a ready snippet:
+Set a Pastebin dev key or a Pastefy API key in Settings, then hit **Loadstring** on any output. Novela uploads it under a random name, copies the raw URL and hands you a ready snippet:
 
 ```lua
 loadstring(game:HttpGet("https://pastefy.app/xxxx/raw"))()
@@ -84,6 +98,26 @@ loadstring(game:HttpGet("https://pastefy.app/xxxx/raw"))()
 ## Settings++
 
 Everything tunable lives under Settings++: ciphers, encodings, VM layers, junk volume and style, dispatcher shape, string splitting, decoys, identifier styles and more.
+
+<details>
+<summary>FAQ</summary>
+
+**Where is the obfuscation core?**
+It ships as an obfuscated binary inside `resources/core/` (or `core-dist/` for local runs). Its source is not public.
+
+**Do I need .NET installed?**
+No. The backend is self-contained.
+
+**Which executors run protected scripts?**
+Anything with `loadstring`/`load`: the loader is plain Luau with no external dependencies.
+
+**Where are my API keys stored?**
+Only in the app's local settings on your machine. They never leave it except in your own upload requests.
+
+**The output is bigger than the input — is that normal?**
+Yes. Junk states, string tables and nested VM layers inflate size on purpose. That is the protection.
+
+</details>
 
 ## License
 
