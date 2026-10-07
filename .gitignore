@@ -1,7 +1,6 @@
 node_modules/
 Release/
 core-dist*/
-vendor/
 tools/
 core/
 *.pdb

@@ -9,13 +9,10 @@
   "scripts": {
     "start": "electron .",
     "dev": "electron .",
-    "postinstall": "powershell -ExecutionPolicy Bypass -File scripts/sync-monaco.ps1",
     "build:core": "dotnet publish core/Novela.Core/Novela.Core.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true -o core-dist",
-    "build:core-protected": "powershell -ExecutionPolicy Bypass -File scripts/build-core-protected.ps1",
     "dist": "electron-builder --win",
     "dist:installer": "electron-builder --win nsis",
-    "dist:portable": "electron-builder --win dir",
-    "release": "powershell -ExecutionPolicy Bypass -File scripts/build-release.ps1"
+    "dist:portable": "electron-builder --win dir"
   },
   "devDependencies": {
     "electron": "^32.0.0",
