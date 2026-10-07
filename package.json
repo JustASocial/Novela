@@ -1,0 +1,83 @@
+{
+  "name": "novela",
+  "version": "1.2.0",
+  "description": "Novela — Luau obfuscator with custom VM backend",
+  "main": "main.js",
+  "author": "Novela",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "postinstall": "powershell -ExecutionPolicy Bypass -File scripts/sync-monaco.ps1",
+    "build:core": "dotnet publish core/Novela.Core/Novela.Core.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true -o core-dist",
+    "build:core-protected": "powershell -ExecutionPolicy Bypass -File scripts/build-core-protected.ps1",
+    "dist": "electron-builder --win",
+    "dist:installer": "electron-builder --win nsis",
+    "dist:portable": "electron-builder --win dir",
+    "release": "powershell -ExecutionPolicy Bypass -File scripts/build-release.ps1"
+  },
+  "devDependencies": {
+    "electron": "^32.0.0",
+    "electron-builder": "^25.1.8",
+    "playwright-core": "^1.63.0",
+    "monaco-editor": "^0.52.2"
+  },
+  "build": {
+    "appId": "com.novela.app",
+    "productName": "Novela",
+    "directories": {
+      "output": "Release",
+      "buildResources": "assets"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "vendor/**/*",
+      "assets/icon.png",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "core-dist",
+        "to": "core",
+        "filter": [
+          "**/*",
+          "!**/*.pdb",
+          "!**/*.xml"
+        ]
+      },
+      {
+        "from": "assets/icon.png",
+        "to": "icon.png"
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "dir"
+      ],
+      "signAndEditExecutable": false,
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "Novela-Setup-${version}.${ext}",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "installerHeaderIcon": "assets/icon.ico",
+      "installerSidebar": "assets/installerSidebar.bmp",
+      "uninstallerSidebar": "assets/installerSidebar.bmp",
+      "uninstallDisplayName": "Novela",
+      "shortcutName": "Novela",
+      "menuCategory": "Novela",
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "publish": null
+    },
+    "publish": null
+  }
+}

@@ -1,0 +1,10 @@
+node_modules/
+Release/
+core-dist*/
+vendor/
+tools/
+core/
+*.pdb
+*.log
+.DS_Store
+novela-server.json

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="turtle">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Novela</title>
+<link rel="icon" type="image/png" href="../assets/icon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3l7 2.6v5.2c0 4.6-3 7.9-7 9.2-4-1.3-7-4.6-7-9.2V5.6L12 3z"/>
+      <path d="M9.2 11.6l2 2 3.6-3.8"/>
+    </symbol>
+    <symbol id="i-tune" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 7h9M17 7h3M4 17h3M11 17h9"/>
+      <circle cx="15" cy="7" r="2.2"/>
+      <circle cx="9" cy="17" r="2.2"/>
+    </symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4.5" width="18" height="15" rx="2.5"/>
+      <path d="M7 9.5l3 3-3 3M12.5 15.5H17"/>
+    </symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3.5 6.5c0-.8.7-1.5 1.5-1.5h4l1.7 2h7.8c.8 0 1.5.7 1.5 1.5v8c0 .8-.7 1.5-1.5 1.5H5c-.8 0-1.5-.7-1.5-1.5v-10z"/>
+    </symbol>
+    <symbol id="i-clear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 7h16M9.5 7V5.2c0-.4.3-.7.7-.7h3.6c.4 0 .7.3.7.7V7M6.5 7l.8 12c0 .4.3.7.7.7h8c.4 0 .7-.3.7-.7l.8-12"/>
+    </symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="9" y="9" width="11" height="11" rx="2"/>
+      <path d="M5 15H4.5c-.8 0-1.5-.7-1.5-1.5v-9C3 3.7 3.7 3 4.5 3h9c.8 0 1.5.7 1.5 1.5V5"/>
+    </symbol>
+    <symbol id="i-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 3.5h11L20.5 8v11c0 .8-.7 1.5-1.5 1.5H5c-.8 0-1.5-.7-1.5-1.5v-14C3.5 4.2 4.2 3.5 5 3.5z"/>
+      <path d="M8 3.5V8h7V3.5M8 20.5v-6h8v6"/>
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M8 5.5v13c0 .8.9 1.3 1.6.9l10-6.5c.6-.4.6-1.4 0-1.8l-10-6.5C8.9 4.2 8 4.7 8 5.5z"/>
+    </symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 12a8 8 0 1 1-2.3-5.6M20 3.5V8h-4.5"/>
+    </symbol>
+    <symbol id="i-dice" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="4"/>
+      <circle cx="8.3" cy="8.3" r="1.1" fill="currentColor" stroke="none"/>
+      <circle cx="15.7" cy="8.3" r="1.1" fill="currentColor" stroke="none"/>
+      <circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none"/>
+      <circle cx="8.3" cy="15.7" r="1.1" fill="currentColor" stroke="none"/>
+      <circle cx="15.7" cy="15.7" r="1.1" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/>
+    </symbol>
+    <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 14a4.2 4.2 0 0 0 6 0l3-3a4.24 4.24 0 0 0-6-6l-1.5 1.5M14 10a4.2 4.2 0 0 0-6 0l-3 3a4.24 4.24 0 0 0 6 6l1.5-1.5"/>
+    </symbol>
+    <symbol id="i-min" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+      <path d="M6 12h12"/>
+    </symbol>
+    <symbol id="i-max" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="6" y="6" width="12" height="12" rx="1.5"/>
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+      <path d="M6 6l12 12M18 6L6 18"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header id="topbar">
+  <div id="drag-region">
+    <div class="brand">
+      <img class="brand-img" src="../assets/icon.png" alt="Novela" width="24" height="24">
+      <span class="brand-name">Novela</span>
+      <span class="brand-ver">1.2.0</span>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="win-btns">
+      <button id="btnMin" class="win-btn" aria-label="Minimize"><svg class="ic"><use href="#i-min"/></svg></button>
+      <button id="btnMax" class="win-btn" aria-label="Maximize"><svg class="ic"><use href="#i-max"/></svg></button>
+      <button id="btnClose" class="win-btn danger" aria-label="Close"><svg class="ic"><use href="#i-close"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<div id="shell">
+  <nav id="rail" aria-label="Primary">
+    <button class="rail-item active" data-view="obfuscator">
+      <svg class="ic"><use href="#i-shield"/></svg><span data-i18n="nav.obfuscator">Obfuscator</span>
+    </button>
+    <button class="rail-item" data-view="settings">
+      <svg class="ic"><use href="#i-tune"/></svg><span data-i18n="nav.settings">Settings</span>
+    </button>
+    <button class="rail-item" data-view="logs">
+      <svg class="ic"><use href="#i-terminal"/></svg><span data-i18n="nav.logs">Logs</span>
+      <span id="logBadge" class="badge hidden">0</span>
+    </button>
+  </nav>
+
+  <main id="content">
+
+    <section id="view-obfuscator" class="view active" aria-label="Obfuscator">
+      <div class="panes">
+        <div class="card pane">
+          <div class="card-head">
+            <h2 data-i18n="in.title">Input Code</h2>
+            <div class="head-actions">
+              <button id="btnOpenFile" class="btn-tonal"><svg class="ic"><use href="#i-folder"/></svg><span data-i18n="in.open">Open file</span></button>
+              <button id="btnSampleInput" class="btn-text" data-i18n="in.sample">Load sample</button>
+              <button id="btnClearInput" class="btn-text"><svg class="ic"><use href="#i-clear"/></svg></button>
+              <button id="btnFullInput" class="btn-text" aria-label="Fullscreen"><svg class="ic"><use href="#i-expand"/></svg></button>
+            </div>
+          </div>
+          <div id="inputEditor" class="editor"></div>
+          <div class="pane-foot"><span id="inputMeta">0 chars · 0 lines</span></div>
+        </div>
+
+        <div class="card pane">
+          <div class="card-head">
+            <h2 data-i18n="out.title">Obfuscated Output</h2>
+            <div class="head-actions">
+              <button id="btnCopyOutput" class="btn-tonal"><svg class="ic"><use href="#i-copy"/></svg><span data-i18n="out.copy">Copy</span></button>
+              <button id="btnSaveOutput" class="btn-tonal"><svg class="ic"><use href="#i-save"/></svg><span data-i18n="out.save">Save</span></button>
+              <button id="btnLoadstring" class="btn-tonal"><svg class="ic"><use href="#i-link"/></svg><span data-i18n="out.loadstring">Loadstring</span></button>
+              <button id="btnFullOutput" class="btn-text" aria-label="Fullscreen"><svg class="ic"><use href="#i-expand"/></svg></button>
+            </div>
+          </div>
+          <div id="outputEditor" class="editor"></div>
+          <div class="pane-foot"><span id="outputMeta" data-i18n="out.empty">No output yet</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2 data-i18n="prot.title">Protection</h2>
+        </div>
+        <div class="slider-grid">
+          <div class="slider-row">
+            <div class="slider-label"><span data-i18n="prot.junk">Junk volume</span><span class="slider-val" id="junkVal">100</span></div>
+            <input type="range" id="sliderJunk" min="0" max="100" step="1" value="100" aria-label="Junk volume">
+          </div>
+          <div class="slider-row">
+            <div class="slider-label"><span data-i18n="prot.layers">VM layers</span><span class="slider-val" id="layersVal">3</span></div>
+            <input type="range" id="sliderLayers" min="1" max="3" step="1" value="3" aria-label="VM layers">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field grow-field">
+            <label for="watermarkInput" data-i18n="prot.watermark">Watermark</label>
+            <textarea id="watermarkInput" rows="5" maxlength="2000" data-i18n-ph="prot.watermarkPh" placeholder="Optional tag or ASCII art embedded into the output header"></textarea>
+          </div>
+          <div class="field seed-field">
+            <label for="seedInput" data-i18n="prot.seed">Seed</label>
+            <div class="seed-box">
+              <input id="seedInput" type="number" value="42" min="0" max="2147483647" step="1">
+              <button id="btnRandomSeed" class="btn-tonal"><svg class="ic"><use href="#i-dice"/></svg></button>
+            </div>
+            <button class="mini-switch" id="swSeedAuto" role="switch" aria-checked="true">
+              <span class="switch"><span class="knob"></span></span><span data-i18n="prot.seedAuto">New seed every run</span>
+            </button>
+          </div>
+        </div>
+        <button class="switch-row" id="swExecLogs" role="switch" aria-checked="false">
+          <span class="switch-text"><span class="switch-title" data-i18n="prot.execlogs">Executor logs</span>
+          <span class="switch-desc" data-i18n="prot.execlogsDesc">Print executor name and sUNC score at runtime</span></span>
+          <span class="switch"><span class="knob"></span></span>
+        </button>
+        <div class="action-row">
+          <div class="grow"></div>
+          <button id="btnObfuscate" class="btn-filled"><svg class="ic"><use href="#i-play"/></svg><span data-i18n="prot.run">Obfuscate Script</span></button>
+        </div>
+        <div id="obfuscateProgress" class="progress hidden" aria-label="Obfuscation in progress">
+          <div class="bar"></div>
+        </div>
+        <div id="statsRow" class="stats-row hidden">
+          <div class="stat"><span class="stat-k" data-i18n="stat.input">Input</span><span class="stat-v" id="statIn">–</span></div>
+          <div class="stat"><span class="stat-k" data-i18n="stat.output">Output</span><span class="stat-v" id="statOut">–</span></div>
+          <div class="stat"><span class="stat-k" data-i18n="stat.ratio">Ratio</span><span class="stat-v" id="statRatio">–</span></div>
+          <div class="stat"><span class="stat-k" data-i18n="stat.time">Time</span><span class="stat-v" id="statTime">–</span></div>
+          <div class="stat"><span class="stat-k" data-i18n="stat.mode">Mode</span><span class="stat-v" id="statMode">–</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-settings" class="view" aria-label="Settings">
+      <div class="page-head">
+        <h1 data-i18n="set.title">Settings</h1>
+      </div>
+      <div class="card settings-card">
+        <h2 data-i18n="set.backend">Backend</h2>
+        <div class="kv"><span class="k" data-i18n="set.exe">Executable</span><span class="v mono" id="backendPath">–</span></div>
+        <div class="kv"><span class="k" data-i18n="set.ver">Version</span><span class="v" id="backendVersion">–</span></div>
+        <div class="kv"><span class="k" data-i18n="set.status">Status</span><span class="v" id="backendState">–</span></div>
+        <div class="row-btns">
+          <button id="btnPing" class="btn-tonal"><svg class="ic"><use href="#i-refresh"/></svg><span data-i18n="set.check">Check connection</span></button>
+        </div>
+        <p class="hint" id="backendError"></p>
+      </div>
+      <div class="card settings-card">
+        <h2 data-i18n="set.pipeline">Pipeline defaults</h2>
+        <button class="switch-row" id="swStrip" role="switch" aria-checked="true">
+          <span class="switch-text"><span class="switch-title" data-i18n="set.strip">Strip comments</span>
+          <span class="switch-desc" data-i18n="set.stripDesc">Remove comments before protection</span></span>
+          <span class="switch"><span class="knob"></span></span>
+        </button>
+        <button class="switch-row" id="swRename" role="switch" aria-checked="true">
+          <span class="switch-text"><span class="switch-title" data-i18n="set.rename">Rename identifiers</span>
+          <span class="switch-desc" data-i18n="set.renameDesc">Rewrite locals to dense names</span></span>
+          <span class="switch"><span class="knob"></span></span>
+        </button>
+        <div class="row-btns">
+          <button id="btnResetSettings" class="btn-text" data-i18n="set.reset">Reset to defaults</button>
+        </div>
+      </div>
+      <div class="card settings-card">
+        <h2 data-i18n="set.language">Language</h2>
+        <div class="row-btns">
+          <select id="langSelect" aria-label="Language"></select>
+        </div>
+      </div>
+      <div class="card settings-card">
+        <h2 data-i18n="set.theme">Theme</h2>
+        <div class="theme-grid" id="themeGrid">
+          <button class="theme-opt" data-theme="turtle"><span class="swatch"></span><span>Turtle</span></button>
+          <button class="theme-opt" data-theme="novela"><span class="swatch"></span><span>Novela</span></button>
+          <button class="theme-opt" data-theme="midnight"><span class="swatch"></span><span>Midnight</span></button>
+          <button class="theme-opt" data-theme="forest"><span class="swatch"></span><span>Forest</span></button>
+          <button class="theme-opt" data-theme="ember"><span class="swatch"></span><span>Ember</span></button>
+        </div>
+      </div>
+      <div class="card settings-card">
+        <h2 data-i18n="prof.title">Prof Settings</h2>
+        <h3 class="group-title" data-i18n="prof.stages">Pipeline stages</h3>
+        <div class="prof-grid">
+          <button class="switch-row" id="pfFlow" role="switch"><span class="switch-text"><span class="switch-title" data-i18n="o.flatten">Control flow flattening</span><span class="switch-desc" data-i18n="o.flattenDesc">State-machine dispatcher with shuffled ids</span></span><span class="switch"><span class="knob"></span></span></button>
+          <button class="switch-row" id="pfVm" role="switch"><span class="switch-text"><span class="switch-title" data-i18n="o.vm">Custom VM engine</span><span class="switch-desc" data-i18n="o.vmDesc">Compressed keyed loader around the result</span></span><span class="switch"><span class="knob"></span></span></button>
+          <button class="switch-row" id="pfStrings" role="switch"><span class="switch-text"><span class="switch-title" data-i18n="o.strings">String encryption</span><span class="switch-desc" data-i18n="o.stringsDesc">Literal table with per-build key</span></span><span class="switch"><span class="knob"></span></span></button>
+          <button class="switch-row" id="pfGarbage" role="switch"><span class="switch-text"><span class="switch-title" data-i18n="o.garbage">Garbage injection</span><span class="switch-desc" data-i18n="o.garbageDesc">Dead states guarded by opaque predicates</span></span><span class="switch"><span class="knob"></span></span></button>
+          <button class="switch-row" id="pfAnti" role="switch"><span class="switch-text"><span class="switch-title" data-i18n="o.anti">Anti-tamper</span><span class="switch-desc" data-i18n="o.antiDesc">Hook detection and metatable locks</span></span><span class="switch"><span class="knob"></span></span></button>
+          <button class="switch-row" id="pfEnv" role="switch"><span class="switch-text"><span class="switch-title" data-i18n="o.env">Environment checks</span><span class="switch-desc" data-i18n="o.envDesc">Executor capability verification</span></span><span class="switch"><span class="knob"></span></span></button>
+        </div>
+        <h3 class="group-title" data-i18n="prof.crypto">Transport crypto</h3>
+        <div class="prof-grid">
+          <div class="select-row"><div><div class="switch-title" data-i18n="o.crypto">Cipher</div><div class="switch-desc" data-i18n="o.cryptoDesc">Stream transform of the payload bytes</div></div>
+            <select id="selCrypto"><option value="0">XOR rolling</option><option value="1">ADD rolling</option><option value="2">XORSHIFT32</option></select></div>
+          <div class="select-row"><div><div class="switch-title" data-i18n="o.encoding">Text encoding</div><div class="switch-desc" data-i18n="o.encodingDesc">Printable transport of the payload</div></div>
+            <select id="selEncoding"><option value="0">Base85</option><option value="1">Base64</option><option value="2">Hex</option></select></div>
+          <button class="switch-row" id="pfComp" role="switch"><span class="switch-text"><span class="switch-title" data-i18n="o.comp">LZ77 compression</span><span class="switch-desc" data-i18n="o.compDesc">Compress payload before encryption</span></span><span class="switch"><span class="knob"></span></span></button>
+        </div>
+        <h3 class="group-title" data-i18n="prof.loader">Loader construction</h3>
+        <div class="prof-grid">
+          <button class="switch-row" id="pfIntegrity" role="switch"><span class="switch-text"><span class="switch-title" data-i18n="o.integrity">Integrity checksum</span><span class="switch-desc" data-i18n="o.integrityDesc">Runtime payload checksum verification</span></span><span class="switch"><span class="knob"></span></span></button>
+          <button class="switch-row" id="pfCharTable" role="switch"><span class="switch-text"><span class="switch-title" data-i18n="o.chartable">Char table</span><span class="switch-desc" data-i18n="o.chartableDesc">Precomputed 0..255 byte table</span></span><span class="switch"><span class="knob"></span></span></button>
+          <button class="switch-row" id="pfGsub" role="switch"><span class="switch-text"><span class="switch-title" data-i18n="o.gsub">gsub batching</span><span class="switch-desc" data-i18n="o.gsubDesc">Chunked pattern decoding</span></span><span class="switch"><span class="knob"></span></span></button>
+          <button class="switch-row" id="pfLazy" role="switch"><span class="switch-text"><span class="switch-title" data-i18n="o.lazy">Lazy strings</span><span class="switch-desc" data-i18n="o.lazyDesc">Decode literals on first use via metatable</span></span><span class="switch"><span class="knob"></span></span></button>
+        </div>
+        <h3 class="group-title" data-i18n="prof.transforms">Code transforms</h3>
+        <div class="prof-grid">
+          <button class="switch-row" id="pfOpaque" role="switch"><span class="switch-text"><span class="switch-title" data-i18n="o.opaque">Opaque predicates</span><span class="switch-desc" data-i18n="o.opaqueDesc">(S*S+S)%2 guards on dead code</span></span><span class="switch"><span class="knob"></span></span></button>
+          <button class="switch-row" id="pfSplit" role="switch"><span class="switch-text"><span class="switch-title" data-i18n="o.split">Split long strings</span><span class="switch-desc" data-i18n="o.splitDesc">Break literals into concatenated chunks</span></span><span class="switch"><span class="knob"></span></span></button>
+          <button class="switch-row" id="pfShuffle" role="switch"><span class="switch-text"><span class="switch-title" data-i18n="o.shuffle">Shuffle definitions</span><span class="switch-desc" data-i18n="o.shuffleDesc">Random decoder order per build</span></span><span class="switch"><span class="knob"></span></span></button>
+          <button class="switch-row" id="pfTshuffle" role="switch"><span class="switch-text"><span class="switch-title" data-i18n="o.tshuffle">Shuffle string table</span><span class="switch-desc" data-i18n="o.tshuffleDesc">Random literal order per build</span></span><span class="switch"><span class="knob"></span></span></button>
+          <div class="select-row"><div><div class="switch-title" data-i18n="o.dispatch">Dispatcher shape</div><div class="switch-desc" data-i18n="o.dispatchDesc">State machine implementation</div></div>
+            <select id="selDispatch"><option value="0" data-i18n="o.dspIf">if-chain</option><option value="1" data-i18n="o.dspTbl">closure table</option></select></div>
+          <div class="select-row"><div><div class="switch-title" data-i18n="o.junkstyle">Junk style</div><div class="switch-desc" data-i18n="o.junkstyleDesc">Shape of injected dead code</div></div>
+            <select id="selJunkStyle"><option value="0" data-i18n="o.jsMixed">Arrays + locals</option><option value="1" data-i18n="o.jsArrays">Giant arrays</option><option value="2" data-i18n="o.jsLocals">Locals</option></select></div>
+          <div class="select-row"><div><div class="switch-title" data-i18n="o.identstyle">Identifier style</div><div class="switch-desc" data-i18n="o.identstyleDesc">Shape of rewritten names</div></div>
+            <select id="selIdentStyle"><option value="0" data-i18n="o.isCompact">Dense 1-2 letters</option><option value="1" data-i18n="o.isLong">Long noise</option></select></div>
+          <div class="select-row"><div><div class="switch-title" data-i18n="o.nummask">Number masking</div><div class="switch-desc" data-i18n="o.nummaskDesc">Rewrite of integer literals</div></div>
+            <select id="selNumMask"><option value="0" data-i18n="o.nmOff">Off</option><option value="1" data-i18n="o.nmHex">Hex</option><option value="2" data-i18n="o.nmArith">Arithmetic</option></select></div>
+          <div class="select-row"><div><div class="switch-title" data-i18n="o.stateDigits">State id digits</div><div class="switch-desc" data-i18n="o.stateDigitsDesc">Magnitude of dispatcher ids</div></div>
+            <select id="selDigits"><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></div>
+        </div>
+        <div class="slider-grid">
+          <div class="slider-row">
+            <div class="slider-label"><span data-i18n="o.splitThr">Split threshold</span><span class="slider-val" id="splitThrVal">24</span></div>
+            <input type="range" id="sliderSplitThr" min="8" max="64" step="1" value="24" aria-label="Split threshold">
+          </div>
+          <div class="slider-row">
+            <div class="slider-label"><span data-i18n="o.decoys">Decoy functions</span><span class="slider-val" id="decoysVal">3</span></div>
+            <input type="range" id="sliderDecoys" min="0" max="6" step="1" value="3" aria-label="Decoy functions">
+          </div>
+          <div class="slider-row">
+            <div class="slider-label"><span data-i18n="o.arrSize">Junk array size</span><span class="slider-val" id="arrSizeVal">100</span></div>
+            <input type="range" id="sliderArrSize" min="20" max="200" step="1" value="100" aria-label="Junk array size">
+          </div>
+        </div>
+        <div class="row-btns">
+          <button id="btnProfReset" class="btn-text" data-i18n="prof.reset">Reset Prof to maximum</button>
+        </div>
+      </div>
+      <div class="card settings-card">
+        <h2 data-i18n="api.title">API and local server</h2>
+        <div class="field-row">
+          <div class="field grow-field">
+            <label for="apiUrl" data-i18n="api.url">Server URL</label>
+            <input id="apiUrl" type="text" value="http://127.0.0.1:4477">
+          </div>
+          <div class="field">
+            <label for="apiToken" data-i18n="api.token">Token</label>
+            <input id="apiToken" type="text" placeholder="optional">
+          </div>
+        </div>
+        <div class="row-btns">
+          <button id="btnApiTest" class="btn-tonal"><svg class="ic"><use href="#i-refresh"/></svg><span data-i18n="api.test">Test</span></button>
+          <span class="v mono" id="apiTestResult">–</span>
+        </div>
+        <button class="switch-row" id="swUseApi" role="switch" aria-checked="false">
+          <span class="switch-text"><span class="switch-title" data-i18n="api.use">Obfuscate via API</span>
+          <span class="switch-desc" data-i18n="api.useDesc">Send jobs to the server instead of the embedded backend</span></span>
+          <span class="switch"><span class="knob"></span></span>
+        </button>
+        <h3 class="group-title" data-i18n="api.local">Local server on this PC</h3>
+        <div class="field-row">
+          <div class="field">
+            <label for="srvPort" data-i18n="api.port">Port</label>
+            <input id="srvPort" type="number" value="4477" min="1" max="65535">
+          </div>
+          <div class="field grow-field">
+            <label for="srvToken" data-i18n="api.token">Token</label>
+            <input id="srvToken" type="text" placeholder="optional">
+          </div>
+        </div>
+        <div class="row-btns">
+          <button id="btnSrvToggle" class="btn-tonal"><svg class="ic"><use href="#i-play"/></svg><span id="srvToggleLabel" data-i18n="api.start">Start server</span></button>
+          <span class="v mono" id="srvStatus">–</span>
+        </div>
+        <button class="switch-row" id="swSrvAuto" role="switch" aria-checked="false">
+          <span class="switch-text"><span class="switch-title" data-i18n="api.srvAuto">Start server with the app</span>
+          <span class="switch-desc" data-i18n="api.srvAutoDesc">Launch the local server on every start</span></span>
+          <span class="switch"><span class="knob"></span></span>
+        </button>
+        <button class="switch-row" id="swAppAuto" role="switch" aria-checked="false">
+          <span class="switch-text"><span class="switch-title" data-i18n="api.appAuto">Start app with the PC</span>
+          <span class="switch-desc" data-i18n="api.appAutoDesc">OS autostart for Novela</span></span>
+          <span class="switch"><span class="knob"></span></span>
+        </button>
+        <button class="switch-row" id="swTray" role="switch" aria-checked="true">
+          <span class="switch-text"><span class="switch-title" data-i18n="api.tray">Minimize to tray</span>
+          <span class="switch-desc" data-i18n="api.trayDesc">Closing the window keeps Novela in the tray</span></span>
+          <span class="switch"><span class="knob"></span></span>
+        </button>
+      </div>
+      <div class="card settings-card">
+        <h2 data-i18n="pst.title">Paste services</h2>
+        <div class="select-row"><div><div class="switch-title" data-i18n="pst.provider">Provider</div><div class="switch-desc" data-i18n="pst.providerDesc">Where loadstrings are uploaded</div></div>
+          <select id="selPasteProvider"><option value="pastebin">Pastebin</option><option value="pastefy">Pastefy</option></select></div>
+        <div class="field-row">
+          <div class="field grow-field">
+            <label for="pastebinKey" data-i18n="pst.pbKey">Pastebin API dev key</label>
+            <input id="pastebinKey" type="password" autocomplete="off">
+          </div>
+          <div class="field grow-field">
+            <label for="pastefyKey" data-i18n="pst.pfKey">Pastefy API key</label>
+            <input id="pastefyKey" type="password" autocomplete="off">
+          </div>
+        </div>
+      </div>
+      <div class="card settings-card docs-card">
+        <h2 data-i18n="docs.title">API guide</h2>
+        <h3 data-i18n="docs.s1t">1. Run the server</h3>
+        <p data-i18n="docs.s1b">Start it from Settings, or run Novela.Core serve --port 4477. The server prints the address it listens on.</p>
+        <h3 data-i18n="docs.s2t">2. Endpoints</h3>
+        <p data-i18n="docs.s2b">GET /api/health checks the server. POST /api/obfuscate takes {source, options, seed} and returns {success, output, stats, logs, error}. Bodies are JSON in UTF-8.</p>
+        <h3 data-i18n="docs.s3t">3. Example</h3>
+        <pre class="mono-block">curl -X POST http://127.0.0.1:4477/api/obfuscate -H "Content-Type: application/json" -d "{\"source\":\"print(1)\",\"seed\":7}"</pre>
+        <h3 data-i18n="docs.s4t">4. Token</h3>
+        <p data-i18n="docs.s4b">Set a token on the server and send it as X-Novela-Token. Requests without it get 401.</p>
+        <h3 data-i18n="docs.s5t">5. Hosting</h3>
+        <p data-i18n="docs.s5b">Host it anywhere you like: your own VPS, a home PC, or just keep the local server on this machine. For remote use, bind --host 0.0.0.0 and put it behind HTTPS.</p>
+      </div>
+    </section>
+
+    <section id="view-logs" class="view" aria-label="Logs">
+      <div class="page-head row">
+        <h1 data-i18n="log.title">Logs</h1>
+        <div class="grow"></div>
+        <button id="btnClearLogs" class="btn-tonal"><svg class="ic"><use href="#i-clear"/></svg><span data-i18n="log.clear">Clear</span></button>
+      </div>
+      <div class="card log-card">
+        <div id="logList" class="log-list" aria-live="polite"></div>
+        <div class="pane-foot"><span id="logCount">0 entries</span></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="../vendor/monaco/vs/loader.js"></script>
+<script src="locales.js"></script>
+<script src="renderer.js"></script>
+</body>
+</html>

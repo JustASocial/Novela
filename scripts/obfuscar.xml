@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Novela.Core assembly protection for Release builds.
+  {{IN}} / {{OUT}} are substituted by build-core-protected.ps1.
+  Strategy: aggressive renaming (incl. Unicode names) of everything.
+  The JSON wire protocol (ObfuscationOptions/Stats/Result, Presets) is
+  excluded via [Obfuscation(Exclude=true)] attributes in code, so the
+  Electron GUI <-> backend contract keeps working.
+-->
+<Obfuscator>
+  <Var name="InPath" value="{{IN}}" />
+  <Var name="OutPath" value="{{OUT}}" />
+  <Var name="KeepPublicApi" value="false" />
+  <Var name="HidePrivateApi" value="true" />
+  <Var name="RenameProperties" value="true" />
+  <Var name="RenameEvents" value="true" />
+  <Var name="RenameFields" value="true" />
+  <Var name="UseUnicodeNames" value="true" />
+  <Var name="ReuseNames" value="true" />
+  <Var name="RegenerateDebugInfo" value="false" />
+  <Module file="$(InPath)\Novela.Core.dll" />
+</Obfuscator>
